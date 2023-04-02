@@ -36,5 +36,5 @@ while True:
             t.daemon = True
             print(f"Car Stopped, driving for {interval} Seconds")    
     else:
-        print("I don't understand that command, use \"help\"for a list of commands")
+        print("I don't understand that command, use \"help\" for a list of commands")
     
