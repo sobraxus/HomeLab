@@ -38,5 +38,5 @@ int main(int argc, char const *argv[])
 
      for(i=0;i<128; i++){
           printf("%hhd | %hhX \n",i,i);
-     }
+          }
 }
