@@ -3,8 +3,6 @@ import os, math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sbrn
-import openml
 from typing import Tuple, Union, List
 
 #--- SKLEARN LIBRARIES ---#
@@ -65,7 +63,7 @@ def load_mnist() -> Dataset:
 
     OpenML dataset link: https://www.openml.org/d/554
     """
-    mnist_openml = openml.datasets.get_dataset(554)
+    mnist_openml = '''LocalSet'''
     Xy, _, _, _ = mnist_openml.get_data(dataset_format="array")
     X = Xy[:, :-1]  # the last column contains labels
     y = Xy[:, -1]
