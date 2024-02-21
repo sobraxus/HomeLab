@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import log_loss
 
-import Utils as utils
+import LR_Utils as utils
 
 if __name__ == "__main__":
 
