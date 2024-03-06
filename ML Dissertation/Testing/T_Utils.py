@@ -64,8 +64,8 @@ def load_mnist() -> Dataset:
 
     OpenML dataset link: https://www.openml.org/d/554
     """
-    mnist_openml = openml.datasets.get_dataset(554)
-    Xy, _, _, _ = mnist_openml.get_data(dataset_format="array")
+    df = pd.read_csv('X')
+    Xy, _, _, _ = df
     X = Xy[:, :-1]  # the last column contains labels
     y = Xy[:, -1]
     # First 60000 samples consist of the train set

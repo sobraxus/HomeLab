@@ -11,7 +11,7 @@ from sklearn import metrics, preprocessing
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, RandomForestRegressor
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, f1_score
 
 XY = Tuple[np.ndarray, np.ndarray]
 Dataset = tuple[XY, XY]
@@ -50,7 +50,7 @@ def set_initial_params(model: LogisticRegression):
     But server asks for initial parameters from clients at launch. Refer to
     sklearn.linear_model.LogisticRegression documentation for more information.
     """
-    n_classes = 10  # MNIST has 10 classes
+    n_classes = 2  # MNIST has 10 classes
     n_features = 784  # Number of features in dataset
     model.classes_ = np.array([i for i in range(10)])
 
@@ -59,19 +59,33 @@ def set_initial_params(model: LogisticRegression):
         model.intercept_ = np.zeros((n_classes,))
 
 
-def load_mnist() -> Dataset:
-    """Loads the MNIST dataset using OpenML.
+def load_Data() -> Dataset:
 
-    OpenML dataset link: https://www.openml.org/d/554
-    """
-    mnist_openml = openml.datasets.get_dataset(554)
-    Xy, _, _, _ = mnist_openml.get_data(dataset_format="array")
-    X = Xy[:, :-1]  # the last column contains labels
-    y = Xy[:, -1]
+    trainDF = pd.read_csv(r"C:\HomeLab\ML Dissertation\Datasets\UNSW-NB15\UNSW_NB15_training-set.csv")
+    testDF = pd.read_csv(r"C:\HomeLab\ML Dissertation\Datasets\UNSW-NB15\UNSW_NB15_testing-set.csv")
+
+    trainDF = trainDF.dropna()
+    trainDF = trainDF.drop_duplicates()
+
+    testDF = testDF.dropna()
+    testDF = testDF.drop_duplicates()
+    
+    trainDF.drop(labels="id", axis=1, inplace=True)
+    trainDF.drop(labels="label", axis=1, inplace=True)
+
+    testDF.drop(labels="id", axis=1, inplace=True)
+    testDF.drop(labels="label", axis=1, inplace=True)
+
+    
+    #split trainDF and testDF into x_train, y_train, x_test, y_test
+    x_train, y_train = trainDF.iloc[:, 1:].values, trainDF.iloc[:, -1].values
+    x_test, y_test = testDF.iloc[:, 1:].values, testDF.iloc[:, -1].values
     # First 60000 samples consist of the train set
-    x_train, y_train = X[:60000], y[:60000]
-    x_test, y_test = X[60000:], y[60000:]
+    x_train, y_train = x_train[:60000], y_train[:60000]
+    x_test, y_test = x_test[:60000], y_test[:60000] 
+
     return (x_train, y_train), (x_test, y_test)
+   
 
 
 def shuffle(X: np.ndarray, y: np.ndarray) -> XY:
