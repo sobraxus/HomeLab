@@ -3,9 +3,8 @@ function Open_FLClients {
     param (
         [Parameter(Mandatory)]$clients
     )
-    wt new-tab cd 'C:\ML Dissertation\LogReg', python LR_Sever.py
     for ($i = 0; $i -lt $clients; $i++){
-        wt new-tab cd 'C:\ML Dissertation\LogReg',python LR_Client.py
+        wt new-tab python 'c:/Users/adamc/Work/HomeLab/ML Dissertation/LogReg/LR_Server.py'
     }
     write-output ("Opened ", $clients, " clients")
 }
