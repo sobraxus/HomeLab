@@ -19,6 +19,8 @@ model = LogisticRegression(
     penalty="l2",
     max_iter=1,  # local epoch
     warm_start=True,  # prevent refreshing weights when fitting
+    #multi_class='multinomial',  # for multi-class classification
+    solver= # solver that supports multinomial loss
 )
 
 utils.set_initial_params(model)
@@ -41,7 +43,4 @@ class MnistClient(fl.client.NumPyClient):
         accuracy = model.score(X_test, y_test)
         return loss, len(X_test), {"accuracy": accuracy}
     
-fl.client.start_numpy_client(
-    server_address="127.0.0.1:8080",
-    client= MnistClient()
-)
+fl.client.start_numpy_client(server_address="127.0.0.1:8080",client= MnistClient())

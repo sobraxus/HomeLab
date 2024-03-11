@@ -3,7 +3,6 @@ import os, math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import openml
 from typing import Tuple, Union, List
 
 #--- SKLEARN LIBRARIES ---#
@@ -50,8 +49,8 @@ def set_initial_params(model: LogisticRegression):
     But server asks for initial parameters from clients at launch. Refer to
     sklearn.linear_model.LogisticRegression documentation for more information.
     """
-    n_classes = 2  # MNIST has 10 classes
-    n_features = 784  # Number of features in dataset
+    n_classes = 10  # MNIST has 10 classes
+    n_features = 194  # Number of features in dataset
     model.classes_ = np.array([i for i in range(10)])
 
     model.coef_ = np.zeros((n_classes, n_features))
@@ -61,33 +60,61 @@ def set_initial_params(model: LogisticRegression):
 
 def load_Data() -> Dataset:
 
-    trainDF = pd.read_csv(r"C:\HomeLab\ML Dissertation\Datasets\UNSW-NB15\UNSW_NB15_training-set.csv")
-    testDF = pd.read_csv(r"C:\HomeLab\ML Dissertation\Datasets\UNSW-NB15\UNSW_NB15_testing-set.csv")
+    #Loading Datasets
+    trainDF = pd.read_csv(r"C:\Users\adamc\Work\HomeLab\ML Dissertation\Datasets\UNSW-NB15\UNSW_NB15_training-set.csv")
+    testDF = pd.read_csv(r"C:\Users\adamc\Work\HomeLab\ML Dissertation\Datasets\UNSW-NB15\UNSW_NB15_testing-set.csv")
 
+    #Dropping null and duplicate values
     trainDF = trainDF.dropna()
     trainDF = trainDF.drop_duplicates()
 
     testDF = testDF.dropna()
     testDF = testDF.drop_duplicates()
     
+    #Dropping redundant columns
     trainDF.drop(labels="id", axis=1, inplace=True)
     trainDF.drop(labels="label", axis=1, inplace=True)
 
     testDF.drop(labels="id", axis=1, inplace=True)
     testDF.drop(labels="label", axis=1, inplace=True)
 
-    
-    #split trainDF and testDF into x_train, y_train, x_test, y_test
-    x_train, y_train = trainDF.iloc[:, 1:].values, trainDF.iloc[:, -1].values
-    x_test, y_test = testDF.iloc[:, 1:].values, testDF.iloc[:, -1].values
-    # First 60000 samples consist of the train set
-    x_train, y_train = x_train[:60000], y_train[:60000]
-    x_test, y_test = x_test[:60000], y_test[:60000] 
+    # Apply one-hot encoding
+    from sklearn.preprocessing import OneHotEncoder
 
+    enc = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
+    enc.fit(trainDF[['proto','service','state','attack_cat']])  # Fit encoder on training data
+
+    train_encoded = enc.transform(trainDF[['proto','service','state','attack_cat']])
+    test_encoded = enc.transform(testDF[['proto','service','state','attack_cat']])
+
+    # Replace 'proto','service','state','attack_cat' column with encoded data
+    trainDF = pd.concat([trainDF.drop(['proto','service','state','attack_cat'], axis=1), pd.DataFrame(train_encoded, columns=enc.get_feature_names_out(['proto','service','state','attack_cat']))], axis=1)
+    testDF = pd.concat([testDF.drop(['proto','service','state','attack_cat'], axis=1), pd.DataFrame(test_encoded, columns=enc.get_feature_names_out(['proto','service','state','attack_cat']))], axis=1)
+    
+    #Create classes variable listing all outcomes of dataset
+    class_name = ['attack_cat_Analysis',
+    'attack_cat_Backdoor',
+    'attack_cat_DoS',
+    'attack_cat_Exploits',
+    'attack_cat_Fuzzers',
+    'attack_cat_Generic',
+    'attack_cat_Normal',
+    'attack_cat_Reconnaissance',
+    'attack_cat_Shellcode',
+    'attack_cat_Worms']
+    # Select everything other than classes
+    x_train = trainDF.drop(columns=class_name)
+    x_test = testDF.drop(columns=class_name)
+    # Select only classes
+    y_test = testDF[class_name]
+    y_train = trainDF[class_name]
+    
+    #This converts classes back to a single column to work better with the regression model
+    y_train = np.argmax(y_train,axis=1)
+    y_test = np.argmax(y_test,axis=1)
+    
     return (x_train, y_train), (x_test, y_test)
    
-
-
 def shuffle(X: np.ndarray, y: np.ndarray) -> XY:
     """Shuffle X and y."""
     rng = np.random.default_rng()
