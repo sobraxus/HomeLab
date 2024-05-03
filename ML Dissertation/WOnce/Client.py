@@ -1,17 +1,14 @@
 import argparse
 import warnings
-
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import log_loss
-from sklearn.model_selection import train_test_split
-
 import numpy as np
 import pandas as pd
 import flwr as fl
 import New_Utils
 
 if __name__ == "__main__":
-    N_CLIENTS = 10
+    N_CLIENTS = 50
 
     parser = argparse.ArgumentParser(description="Flower")
     parser.add_argument(
@@ -48,7 +45,7 @@ if __name__ == "__main__":
 
 New_Utils.set_initial_params(model)
 
-class MnistClient(fl.client.NumPyClient):
+class FL(fl.client.NumPyClient):
     def get_parameters(self, config):  # type: ignore
         return New_Utils.get_model_parameters(model)
 
@@ -69,5 +66,5 @@ class MnistClient(fl.client.NumPyClient):
     
 fl.client.start_client(
     server_address="127.0.0.1:8080",
-    client=MnistClient().to_client()
+    client=FL().to_client()
 )

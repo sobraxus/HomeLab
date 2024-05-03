@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from flwr.common import NDArrays
 
 
+
 def get_model_parameters(model: LogisticRegression) -> NDArrays:
     """Returns the parameters of a sklearn LogisticRegression model."""
     if model.fit_intercept:
@@ -20,6 +21,15 @@ def get_model_parameters(model: LogisticRegression) -> NDArrays:
 
 def load_Data():
     fds = pd.read_csv(r"C:\Users\adamc\Work\HomeLab\ML Dissertation\Datasets\UNSW-NB15\UNSW_NB15_testing-set.csv")
+    
+    if(fds.isnull().values.sum() != 0):
+        fds = fds.dropna()
+    
+    if(fds.nunique().values.sum() != 0):
+        fds = fds.drop_duplicates()
+    
+    fds.drop(labels="id", axis=1, inplace=True)
+    
     fds = pd.get_dummies(fds, columns=['proto', 'service', 'state', 'attack_cat'])
 
     X = fds.drop('label', axis=1)
@@ -46,7 +56,7 @@ def set_initial_params(model: LogisticRegression):
     sklearn.linear_model.LogisticRegression documentation for more information.
     """
     n_classes = 2  # MNIST has 10 classes
-    n_features = 201  # Number of features in dataset
+    n_features = 200  # Number of features in dataset (Note: training: 204 Testing: 200)
    
 
 
