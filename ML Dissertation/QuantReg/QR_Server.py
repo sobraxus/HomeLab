@@ -1,5 +1,5 @@
 import flwr as fl
-import Utils as utils
+import QR_Utils as utils
 from flwr.common import NDArrays, Scalar
 from sklearn.metrics import log_loss
 from sklearn.linear_model import LogisticRegression

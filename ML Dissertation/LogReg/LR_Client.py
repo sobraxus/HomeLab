@@ -4,12 +4,19 @@ import numpy as np
 
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import log_loss
+from sklearn.preprocessing import RobustScaler
 
 import LR_Utils as utils
 
 if __name__ == "__main__":
 
+    #Loading data into train and test sets
     (X_train, y_train), (X_test, y_test) = utils.load_Data()
+    #print((X_train, y_train), (X_test, y_test))
+     #Using robust scaler to scale data between 0 and 1
+    """ scaler = RobustScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.transform(X_test) """ 
 
     partition_id = np.random.choice(10)
     (X_train, y_train) = utils.partition(X_train, y_train, 10)[partition_id]
@@ -18,11 +25,9 @@ if __name__ == "__main__":
 model = LogisticRegression(
     penalty="l2",
     max_iter=1,  # local epoch
-    warm_start=True,  # prevent refreshing weights when fitting
-    #multi_class='multinomial',  # for multi-class classification
-    solver= # solver that supports multinomial loss
+    #warm_start=True,  # prevent refreshing weights when fitting
+    multi_class='multinomial'
 )
-
 utils.set_initial_params(model)
 
 class MnistClient(fl.client.NumPyClient):
@@ -31,6 +36,8 @@ class MnistClient(fl.client.NumPyClient):
 
     def fit(self, parameters, config): 
         utils.set_model_params(model, parameters)
+        print("X_train shape:", X_train.shape)
+        print("y_train shape:", y_train.shape)
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             model.fit(X_train, y_train)
@@ -39,6 +46,10 @@ class MnistClient(fl.client.NumPyClient):
 
     def evaluate(self, parameters, config):  
         utils.set_model_params(model, parameters)
+        print("X_train shape:", X_train.shape)
+        print("y_train shape:", y_train.shape)
+        # Generate predictions
+
         loss = log_loss(y_test, model.predict_proba(X_test))
         accuracy = model.score(X_test, y_test)
         return loss, len(X_test), {"accuracy": accuracy}

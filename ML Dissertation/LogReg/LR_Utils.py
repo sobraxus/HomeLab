@@ -4,13 +4,15 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from typing import Tuple, Union, List
-
 #--- SKLEARN LIBRARIES ---#
 from sklearn import metrics, preprocessing
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, RandomForestRegressor
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error, f1_score
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import RobustScaler
+
 
 XY = Tuple[np.ndarray, np.ndarray]
 Dataset = tuple[XY, XY]
@@ -29,6 +31,7 @@ def get_model_parameters(model: LogisticRegression) -> LogRegParams:
         params = [
             model.coef_,
         ]
+    print("get_model_params shapes:", [p.shape for p in params])
     return params
 
 
@@ -36,6 +39,10 @@ def set_model_params(
     model: LogisticRegression, params: LogRegParams
 ) -> LogisticRegression:
     """Sets the parameters of a sklean LogisticRegression model."""
+    print("set_model_params shapes:", [p.shape for p in params])
+    print("model.coef_ shape:", model.coef_.shape)
+    if model.fit_intercept:
+        print("model.intercept_ shape:", model.intercept_.shape)
     model.coef_ = params[0]
     if model.fit_intercept:
         model.intercept_ = params[1]
@@ -55,7 +62,7 @@ def set_initial_params(model: LogisticRegression):
 
     model.coef_ = np.zeros((n_classes, n_features))
     if model.fit_intercept:
-        model.intercept_ = np.zeros((n_classes,))
+        model.intercept_ = np.zeros((n_classes))
 
 
 def load_Data() -> Dataset:
@@ -65,32 +72,33 @@ def load_Data() -> Dataset:
     testDF = pd.read_csv(r"C:\Users\adamc\Work\HomeLab\ML Dissertation\Datasets\UNSW-NB15\UNSW_NB15_testing-set.csv")
 
     #Dropping null and duplicate values
-    trainDF = trainDF.dropna()
-    trainDF = trainDF.drop_duplicates()
 
-    testDF = testDF.dropna()
-    testDF = testDF.drop_duplicates()
+    #Create an if statement for if there are any null values or duplicates in trainDF and drop them if true
+    if(trainDF.isnull().values.sum() != 0):
+        trainDF = trainDF.dropna()
     
+    if(trainDF.nunique().values.sum() != 0):
+        trainDF = trainDF.drop_duplicates()
+
     #Dropping redundant columns
     trainDF.drop(labels="id", axis=1, inplace=True)
     trainDF.drop(labels="label", axis=1, inplace=True)
 
     testDF.drop(labels="id", axis=1, inplace=True)
     testDF.drop(labels="label", axis=1, inplace=True)
-
-    # Apply one-hot encoding
-    from sklearn.preprocessing import OneHotEncoder
-
+    
+    #Apply one-hot encoding to 'proto','service','state','attack_cat' columns
     enc = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
     enc.fit(trainDF[['proto','service','state','attack_cat']])  # Fit encoder on training data
 
     train_encoded = enc.transform(trainDF[['proto','service','state','attack_cat']])
-    test_encoded = enc.transform(testDF[['proto','service','state','attack_cat']])
+    test_encoded  = enc.transform(testDF[['proto','service','state','attack_cat']])
 
     # Replace 'proto','service','state','attack_cat' column with encoded data
     trainDF = pd.concat([trainDF.drop(['proto','service','state','attack_cat'], axis=1), pd.DataFrame(train_encoded, columns=enc.get_feature_names_out(['proto','service','state','attack_cat']))], axis=1)
-    testDF = pd.concat([testDF.drop(['proto','service','state','attack_cat'], axis=1), pd.DataFrame(test_encoded, columns=enc.get_feature_names_out(['proto','service','state','attack_cat']))], axis=1)
+    testDF  = pd.concat([testDF.drop(['proto','service','state','attack_cat'],  axis=1), pd.DataFrame(test_encoded,  columns=enc.get_feature_names_out(['proto','service','state','attack_cat']))], axis=1)
     
+
     #Create classes variable listing all outcomes of dataset
     class_name = ['attack_cat_Analysis',
     'attack_cat_Backdoor',
@@ -102,17 +110,15 @@ def load_Data() -> Dataset:
     'attack_cat_Reconnaissance',
     'attack_cat_Shellcode',
     'attack_cat_Worms']
+
     # Select everything other than classes
     x_train = trainDF.drop(columns=class_name)
     x_test = testDF.drop(columns=class_name)
     # Select only classes
     y_test = testDF[class_name]
     y_train = trainDF[class_name]
-    
-    #This converts classes back to a single column to work better with the regression model
-    y_train = np.argmax(y_train,axis=1)
-    y_test = np.argmax(y_test,axis=1)
-    
+
+     
     return (x_train, y_train), (x_test, y_test)
    
 def shuffle(X: np.ndarray, y: np.ndarray) -> XY:
