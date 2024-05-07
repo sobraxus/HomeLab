@@ -30,7 +30,7 @@ model = LogisticRegression(
 )
 utils.set_initial_params(model)
 
-class MnistClient(fl.client.NumPyClient):
+class ADAMFL(fl.client.NumPyClient):
     def get_parameters(self, config): 
         return utils.get_model_parameters(model)
 
