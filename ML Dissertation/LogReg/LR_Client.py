@@ -54,4 +54,4 @@ class ADAMFL(fl.client.NumPyClient):
         accuracy = model.score(X_test, y_test)
         return loss, len(X_test), {"accuracy": accuracy}
     
-fl.client.start_numpy_client(server_address="127.0.0.1:8080",client= MnistClient())
+fl.client.start_numpy_client(server_address="127.0.0.1:8080",client= ADAMFL())
