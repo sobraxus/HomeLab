@@ -1,4 +1,4 @@
-function check_token{
+function Check-Token{
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$false, Position=1)] $group,
