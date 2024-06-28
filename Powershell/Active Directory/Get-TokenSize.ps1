@@ -1,4 +1,46 @@
 function Get-TokenSize{
+
+<# 
+
+.SYNOPSIS
+
+Used to generate the accurate kerberos token size of a user
+
+.DESCRIPTION
+
+While this script alone can be used to generate a user's token size if added to a group (Example1)
+Similarly it can be reversed to generate a group added to a group (Example2)
+or even to send an automated email via a task scheduler to check what the highest token count is on a daily basis.
+
+Remember, your second entry (-group) will be added to your first entry (-user)
+
+There is always room for improvment also.
+
+.EXAMPLE
+
+In this example we will assume the following:
+
+User: 805
+Group: 150
+
+Terminal: Get-TokenSize -user adam1 -group testgroup
+Output: adam1's total permissions will be 955
+
+.EXAMPLE
+
+In this example we will assume the following:
+
+Group1: 340
+Group2: 120
+
+and that this is a seperate token generation script dedicated to groups (however you can put a group in the user section just remember that's the one you want to add to)
+
+Terminal: Get-TokenSizeGroup -group1 SecEngTest -group2 K8Admin
+Output: adam1's total permissions will be 460
+
+#>
+
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$false, Position=1)] $group, #Parameter for group entry in terminal
@@ -37,7 +79,7 @@ function Get-TokenSize{
 
         $uniquePerms = ($userImport+$groupImport) | Select-Object SamAccountName -Unique #Selects only unique names from SamAccountName. Adds both together.
         $totalPerms = ($uniquePerms - 6 - $user.count - $group.count) #Subtract 6 for shadow groups (Domain Users etc) and subtract the amount of user and group inputted anyway
-        Write-Host $totalPerms #Total permissions should accurately reflect
+        Write-Host "$user's total permissions will be $totalPerms" #Total permissions should accurately reflect
         }
     }
 }
