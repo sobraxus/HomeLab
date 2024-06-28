@@ -1,4 +1,4 @@
-function Check-Token{
+function Get-TokenSize{
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$false, Position=1)] $group,
