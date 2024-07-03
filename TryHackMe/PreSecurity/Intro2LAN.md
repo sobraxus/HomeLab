@@ -46,7 +46,7 @@
 - If there is a record of this, ARP Reply is sent from that device to acknowledge this
 - Reply contains that device MAC address
 
-![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/ARP.png)
+![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/Network_Topologies/ARP.png)
 
 ### H3 Dynamic Host Configuration Protocol (DHCP)
 
@@ -57,7 +57,7 @@
 -- DHCP Request (Client) - Accepts x.x.x.x address
 -- DHCP Ack (Server) - Assigns x.x.x.x to client for x period (typically 24 hours)
 
-![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/DHCP.png)
+![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/Network_Topologies/DHCP.png)
 
 
 
