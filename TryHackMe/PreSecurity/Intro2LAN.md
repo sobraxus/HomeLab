@@ -4,17 +4,17 @@
 #### Star Topology
 - Systems are connected via a central hub e.g. server, switch or hub. Has a high scalability.
 
-![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/Star.png)
+![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/Network_Topologies/Star.png)
 
-#### Bus Topology
+#### Bus Topology 
 - Relies on single connection across the whole line of nodes. Prone to bottlenecks. 
 
-![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/Bus.png)
+![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/Network_Topologies/Bus.png)
 
 #### Ring Topology
 - Packets travel from one device to the next until they have reached their destination
 
-![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/Ring.png)
+![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/Network_Topologies/Ring.png)
 
 #### Switch
 - Dedicated device for direct routing the traffic to the intended destination rather than querying each possibility within the network
@@ -30,7 +30,7 @@
 -- Identify Host Address - Device IP
 -- Identify Default Gateway - Address of a device capable of route traffic to another network
 
-![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/Subnetting.png)
+![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/Network_Topologies/Subnetting.png)
 
 ### Address Resolultion Protocol (ARP)
 
