@@ -1,13 +1,11 @@
 ## OSI Model Introduction & Runthrough
 
 ### Open Systems Interconnection (OSI) Model
+![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/OSI_Levels.svg)
 - Fundamental model used in networking
 - Dictates how networked devices send, recieve and interpret data
 - Consists of seven layers
 - Throughout each layer information is added to this data. The term for this is encapsulation
-
-![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/OSI_Levels.svg)
-
 
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_7.svg)
 - Determines how the user should interact with data
