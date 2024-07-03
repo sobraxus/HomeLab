@@ -8,20 +8,20 @@
 
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/OSI_Levels.svg)
 
-#### Layer 7 - Application
+
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_7.svg)
 - Determines how the user should interact with data
 - Has a Graphical User Interface (GUI) for users to receive data
 - Domain Name System (DNS) How website addresses are translated
 
-#### Layer 6 - Presentation
+
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_6.svg)
 - Standardisation for all software
 - Translates data to the application layer
 - Two different email clients will present the same email identically
 - Security features such as data encryption (HTTPS) are at this level
 
-#### Layer 5 - Session
+
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_5.svg)
 - Begins to create a connection to destination
 - Creates a new sessions when connection established
@@ -32,7 +32,7 @@
 -- Data cannot travel between different sessions
 -- Data can only travel individually between each session
 
-#### Layer 4 - Transport
+
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_4.svg)
 - Plays a vital part in transmitting data across a network
 - Two protocols used:
@@ -55,7 +55,7 @@
 
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/UDP.svg)
 
-#### Layer 3 - Network
+
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_3.svg)
 
 - Routing and re-assmebly of data takes place in this layer (small-to-larger chunk)
@@ -71,7 +71,7 @@
 
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Routing.svg)
 
-#### Layer 2 - Data link
+
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_2.svg)
 
 - Focus here is physical addressing
@@ -80,7 +80,7 @@
 - Though MAC addresses can't be changed, they can be spoofed.
 - When info is sent across the network it's the physical layer (L1) which determines where to send info.
 
-#### Layer 1 - Physical
+
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_1.svg)
 
 - References Physical Components
