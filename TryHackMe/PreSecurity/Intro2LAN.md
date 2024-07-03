@@ -1,28 +1,28 @@
-### H2 Introduction to Local Area Networks
+## Introduction to Local Area Networks
 
-### H3 Network Topologies
-### H4 Star Topology
+### Network Topologies
+#### Star Topology
 - Systems are connected via a central hub e.g. server, switch or hub. Has a high scalability.
 
 ![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/Star.png)
 
-### H4 Bus Topology
+#### Bus Topology
 - Relies on single connection across the whole line of nodes. Prone to bottlenecks. 
 
 ![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/Bus.png)
 
-### H4 Ring Topology
+#### Ring Topology
 - Packets travel from one device to the next until they have reached their destination
 
 ![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/Ring.png)
 
-### H4 Switch
+#### Switch
 - Dedicated device for direct routing the traffic to the intended destination rather than querying each possibility within the network
 
-### H4 Router
+#### Router
 - Used to connect different networks and pass data between them
 
-### H3 Subnetting
+### Subnetting
 - Subnet is used to break a network into different sub networks
 - Subnet mask is 32 bits
 - Utilise IP addresses three different ways:
@@ -32,14 +32,14 @@
 
 ![Alt text](https://github.com/sobraxus/HomeLab/TryHackMe/PreSecurity/Network_Topologies/Subnetting.png)
 
-### H3 Address Resolultion Protocol (ARP)
+### Address Resolultion Protocol (ARP)
 
-### H4 What is it?
+#### What is it?
 - ARP allows a device to associate the MAC address with an IP address on the network
 - Each device on a network will keep a list of MAC addresses
 - When devices want to communicate they will use ARP and query for the specific device using the MAC address for communication
 
-### H4 How does it work?
+#### How does it work?
 
 - ARP request is sent - Message is broadcasted to all devices in the network
 - The request asks if the device MAC matches the IP address
@@ -48,7 +48,7 @@
 
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/Network_Topologies/ARP.png)
 
-### H3 Dynamic Host Configuration Protocol (DHCP)
+### Dynamic Host Configuration Protocol (DHCP)
 
 - IP Address' can either be manually or automatically assigned
 - To assign via DHCP, the following is carried out between client/server

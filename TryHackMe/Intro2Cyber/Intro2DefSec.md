@@ -1,9 +1,9 @@
-### H2 Introduction to Defensive Security
+## Introduction to Defensive Security
 
-### H3 What is Defensive Security?
+### What is Defensive Security?
 - The opposite of offensive - Protecting systems from threats and detecting when they occur
 
-### H3 Tasks covered by a blue team:
+### Tasks covered by a blue team:
 - Security Awareness Training
 - Documentating and asset management
 - Updating/Patching systems
@@ -11,7 +11,7 @@
 - Setting up logging - rsyslog for example
 - Setting up monitoring - Suricata
 
-### H3 SOC:
+### SOC:
 
 - Monitor network and systems for security events. Specifically looking for 
 -- Vulnerabilities
@@ -19,14 +19,14 @@
 -- Unauthorized Activity
 -- Network Intrusions
 
-### H3Threat intelligence
+### Threat intelligence
 - Gathering data
 - Analysing
 - Learning about adversaries. 
 -- I use "adversaries" in a wide context here, anything that will adversly affect the estate, vulnerability in software to an external attacker.
 
 
-### H3Digital Forensic Incident Response (DFIR)
+### Digital Forensic Incident Response (DFIR)
 
 - Digital Forensics
 

@@ -1,6 +1,6 @@
-### H2 OSI Model Introduction & Runthrough
+## OSI Model Introduction & Runthrough
 
-### H3 Open Systems Interconnection (OSI) Model
+### Open Systems Interconnection (OSI) Model
 - Fundamental model used in networking
 - Dictates how networked devices send, recieve and interpret data
 - Consists of seven layers
@@ -8,20 +8,20 @@
 
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/OSI_Levels.svg)
 
-### H4 Layer 7 - Application
+#### Layer 7 - Application
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_7.svg)
 - Determines how the user should interact with data
 - Has a Graphical User Interface (GUI) for users to receive data
 - Domain Name System (DNS) How website addresses are translated
 
-### H4 Layer 6 - Presentation
+#### Layer 6 - Presentation
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_6.svg)
 - Standardisation for all software
 - Translates data to the application layer
 - Two different email clients will present the same email identically
 - Security features such as data encryption (HTTPS) are at this level
 
-### H4 Layer 5 - Session
+#### Layer 5 - Session
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_5.svg)
 - Begins to create a connection to destination
 - Creates a new sessions when connection established
@@ -32,7 +32,7 @@
 -- Data cannot travel between different sessions
 -- Data can only travel individually between each session
 
-### H4 Layer 4 - Transport
+#### Layer 4 - Transport
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_4.svg)
 - Plays a vital part in transmitting data across a network
 - Two protocols used:
@@ -55,7 +55,7 @@
 
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/UDP.svg)
 
-### H4 Layer 3 - Network
+#### Layer 3 - Network
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_3.svg)
 
 - Routing and re-assmebly of data takes place in this layer (small-to-larger chunk)
@@ -71,7 +71,7 @@
 
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Routing.svg)
 
-### H4 Layer 2 - Data link
+#### Layer 2 - Data link
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_2.svg)
 
 - Focus here is physical addressing
@@ -80,7 +80,7 @@
 - Though MAC addresses can't be changed, they can be spoofed.
 - When info is sent across the network it's the physical layer (L1) which determines where to send info.
 
-### H4 Layer 1 - Physical
+#### Layer 1 - Physical
 ![Alt text](https://github.com/sobraxus/HomeLab/blob/master/TryHackMe/PreSecurity/OSI/Level_1.svg)
 
 - References Physical Components
