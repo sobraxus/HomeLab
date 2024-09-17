@@ -1,0 +1,56 @@
+form {
+    margin: 25px auto;
+    width: 450px;
+    height: 450px;
+    padding: 30px;
+    border: 1px solid #ccc;
+}
+
+input {
+    width: 93%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #00ff59;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.create_account_submit{
+    width: 485px;
+}
+
+.login_submit{
+    width: 485px;
+}
+
+
+.create_account_button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.login_button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.checkbox_age, 
+.checkbox_TOS {
+    display: flex;
+    align-items: right;
+    margin-bottom: 10px;
+    vertical-align: middle;
+}
+
+.checkbox_age input,
+.checkbox_TOS input {
+    vertical-align: right;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Create Account</h1>
+    <form method="POST" action="{{ url_for('create_account') }}">
+        {{form.name.label}}{{ form.name }}
+        {{ form.email.label }}{{ form.email }}
+        {{ form.password.label }} {{ form.password }}
+        {{ form.dob.label }} {{ form.dob }}
+        <div class="checkbox_age">
+            {{ form.age_restriction.label}} {{ form.age_restriction }}
+        </div>
+        <div class="checkbox_TOS">
+            {{ form.terms_of_service.label }} {{ form.terms_of_service }}
+        </div>
+        <div class="create_account_submit">{{ form.submit }} </div>
+    </form>
+    <a href="/login">
+        <button class="login_button">Login</button>
+    </a>
+</body>
+</html>

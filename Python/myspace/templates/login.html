@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Login</h1>
+    
+    <form method="POST" action="{{ url_for('login') }}">
+        {{ form.username.label }}{{ form.username }}
+        {{ form.password.label }}{{ form.password }}
+        <div class=login_submit>{{ form.submit }}</div>
+    </form>
+        <a href="/create_account">
+            <button class="create_account_button">Create Account</button>
+        </a>
+        
+</body>
+</html>
