@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playbook Generator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  
+  <h2 id="playbookGenerator" style="text-align: center;">Playbook Generator</h2>
+  <div class="top-bar">
+    <button>Generate Playbook</button>
+    <button>Subnet Calculator</button>
+    <button>Firewall Rules</button>
+
+    <a href="/portfolio">
+    <button>Portfolio</button>
+    </a>
+    
+  </div>
+
+  <form>
+    <label>Playbook Name:</label>
+    <input type="text" name="playbookName" id="playbookName" required><br><br>
+    
+    <label>Severity:</label>
+    <select id="severity" name="severity">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>   
+
+      <option value="high">Critical</option>
+    </select><br><br>
+
+    <label>Type of Attack:</label>
+    <select id="attackType" name="attackType">
+      <option value="phishing">Phishing</option>
+      <option value="malware">Malware</option>
+      <option value="ddos">DDoS</option>
+    </select><br><br>
+
+    <label>Playbook Description:</label>
+    <textarea id="playbookDescription" name="playbookDescription"></textarea><br><br>
+    
+    <label>Investigation Code:</label>
+    <textarea id="investigationCode" name="investigationCode"></textarea><br><br>
+    
+    <div class="formButtons">
+    <button type="submit">Generate Playbook</button>
+    <button type="reset">Clear</button>
+    </div>
+
+  </form>
+
+</body>
+</html>
