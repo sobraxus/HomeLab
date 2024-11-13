@@ -94,6 +94,8 @@ def create_account():
             return redirect(url_for('login'))
     return render_template('create_account.html', form=form)
 
+@app.route('/')
+
 # ... (Create additional routes if needed)
 
 if __name__ == '__main__':

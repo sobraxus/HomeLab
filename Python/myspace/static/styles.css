@@ -54,3 +54,41 @@ button {
 .checkbox_TOS input {
     vertical-align: right;
 }
+
+/* styles.css */
+
+/* Overall container for the profile page */
+.profile-container {
+    display: flex;
+    align-items: flex-start; /* Align items vertically at the top */
+    gap: 20px; /* Add spacing between elements */
+}
+
+/* Profile image (top left) */
+.profile-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    /* Add any other styling you want for the profile image */
+}
+
+/* Basic profile information (directly below image) */
+.profile-info {
+    /* Add styling for the user details (name, role, location) */
+}
+
+/* Profile bio (to the right of basic info) */
+.profile-bio {
+    /* Add styling for the user bio text */
+}
+
+/* Best friends list (under profile bio) */
+.best-friends ul {
+    list-style: none;
+    padding: 0;
+}
+
+.best-friends li {
+    margin-bottom: 10px;
+    /* Add any other styling for the list items */
+}
