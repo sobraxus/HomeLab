@@ -1,0 +1,42 @@
+Obtain Internet Connection:
+iw dev
+wifi-menu <insert_wifi_name>
+ping archlinux.org
+
+Partitioning Disks:
+lsblk (View block devices on system)
+cfdisk /dev/<insert_block_name>
+mkfs.fat -F32 /dev/<insert_block_name> # EFI
+mkfs.ext4 /dev/<insert_block_name> # BOOT
+mkfs.ext4 /dev/<insert_block_name> # ROOT
+
+mount /dev/root /mnt
+mkdir /mnt/boot
+mount /dev/boot /mnt/boot
+mkdir /mnt/boot/efi
+mount /dev/efi /mnt/boot/efi
+df -h
+
+Base installation:
+pacstrap /mnt base
+
+Confirgure Arch System:
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt /bin/bash
+ln -sf /usr/hare/zoneinfo/Region/City /etc/localtime
+hwclock --systohc --utc
+nano /etc/locale.gen >> uncomment en_uk.UTF-8
+locale-gen
+echo LANG=en_UK.UTF-8 > /etc/locale.conf
+echo <set_hostname> > /etc/hostname
+127.0.0.1    localhost myhostname
+::1          localhost myhostname
+
+grub-mkconfig -o /boot/grub/grub.cfg
+dd if=/dev/zero of=/swapfile bs=1M count=2048
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
+exit
+reboot now
